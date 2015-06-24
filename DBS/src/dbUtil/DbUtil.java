@@ -18,12 +18,9 @@ public abstract class DbUtil {
 		else {
 			try {
 				String driver = "com.mysql.jdbc.Driver";
-				String url = "jdbc:mysql://mariadb55.websupport.sk:3310/ikvb6ju5";
-				String user = "ikvb6ju5";
-				String password = "eJG-nzG-TK4-9bX";
-				/*String url = "jdbc:mysql://localhost:3306/drug_table";
+				String url = "jdbc:mysql://localhost:3306/DBS";
 				String user = "root";
-				String password = "root";*/
+				String password = "root";
 				Class.forName(driver);
 				connection = DriverManager.getConnection(url, user, password);
 			} catch (SQLException e) {

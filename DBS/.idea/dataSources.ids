@@ -101,4 +101,107 @@
       <index name="pk_sess" unique="false" columns="patient_id"/>
     </table>
   </data-source>
+  <data-source name="MySQL - DBS@localhost" uuid="c288628c-73df-49ad-aab9-e423019067a9">
+    <database-info product="MySQL" version="5.5.38" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.34 ( Revision: jess.balint@oracle.com-20141014163213-wqbwpf1ok2kvo1om )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="mixed" quoted-identifiers="upper"/>
+    <schema name="" catalog="DBS"/>
+    <table name="doctor" schema="" catalog="DBS" type="TABLE">
+      <column name="doctor_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="doctor_type_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="login" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="doctor_id"/>
+      <foreign-key name="doctor_ibfk_1" columns="doctor_type_id" ref-table="doctor_type" ref-schema="" ref-catalog="DBS" ref-columns="doctor_type_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="doctor_patient_ibfk_1" table="doctor_patient" schema="" catalog="DBS" columns="doctor_id"/>
+      <exported-key name="session_ibfk_2" table="session" schema="" catalog="DBS" columns="doctor_id"/>
+      <index name="fk_doctor_doctor_type1_idx" unique="false" columns="doctor_type_id"/>
+    </table>
+    <table name="doctor_patient" schema="" catalog="DBS" type="TABLE">
+      <column name="dp_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="doctor_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="patient_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="registered" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="dp_id"/>
+      <foreign-key name="doctor_patient_ibfk_1" columns="doctor_id" ref-table="doctor" ref-schema="" ref-catalog="DBS" ref-columns="doctor_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="doctor_patient_ibfk_2" columns="patient_id" ref-table="patient" ref-schema="" ref-catalog="DBS" ref-columns="patient_id" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="doctor_type" schema="" catalog="DBS" type="TABLE">
+      <column name="doctor_type_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="zameranie" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="doctor_type_id"/>
+      <exported-key name="doctor_ibfk_1" table="doctor" schema="" catalog="DBS" columns="doctor_type_id"/>
+    </table>
+    <table name="drug_type" schema="" catalog="DBS" type="TABLE">
+      <column name="drug_type_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="typ_lieku" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="drug_type_id"/>
+    </table>
+    <table name="drugs" schema="" catalog="DBS" type="TABLE">
+      <column name="drug_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="count" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="drug_type_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="recept" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6"/>
+      <column name="state" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <primary-key name="PRIMARY" columns="drug_id"/>
+      <exported-key name="fk_drugs_id" table="items" schema="" catalog="DBS" columns="drug_id"/>
+      <index name="fk_drugs_drug_type1_idx" unique="false" columns="drug_type_id"/>
+    </table>
+    <table name="items" schema="" catalog="DBS" type="TABLE">
+      <column name="items_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="recept_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="pocet_kusov" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MQ=="/>
+      <column name="order_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="drug_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="items_id"/>
+      <foreign-key name="fk_recept_id" columns="recept_id" ref-table="recept" ref-schema="" ref-catalog="DBS" ref-columns="recept_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_drugs_id" columns="drug_id" ref-table="drugs" ref-schema="" ref-catalog="DBS" ref-columns="drug_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_order_id" columns="order_id" ref-table="orders" ref-schema="" ref-catalog="DBS" ref-columns="order_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_drugs_id" unique="false" columns="drug_id"/>
+      <index name="fk_order_id" unique="false" columns="order_id"/>
+      <index name="fk_recept_id" unique="false" columns="recept_id"/>
+    </table>
+    <table name="orders" schema="" catalog="DBS" type="TABLE">
+      <column name="order_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="date" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="serial_number" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="patient_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="order_id"/>
+      <exported-key name="fk_order_id" table="items" schema="" catalog="DBS" columns="order_id"/>
+      <index name="fk_order_patient1_idx" unique="false" columns="patient_id"/>
+    </table>
+    <table name="patient" schema="" catalog="DBS" type="TABLE">
+      <column name="patient_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="poistovna" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="last_name" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="patient_id"/>
+      <exported-key name="doctor_patient_ibfk_2" table="doctor_patient" schema="" catalog="DBS" columns="patient_id"/>
+      <exported-key name="pk_sess" table="session" schema="" catalog="DBS" columns="patient_id"/>
+      <exported-key name="session_ibfk_1" table="session" schema="" catalog="DBS" columns="patient_id"/>
+    </table>
+    <table name="recept" schema="" catalog="DBS" type="TABLE">
+      <column name="recept_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="date" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="patient_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="doctor_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="recept_id"/>
+      <exported-key name="fk_recept_id" table="items" schema="" catalog="DBS" columns="recept_id"/>
+      <index name="fk_recept_doctor1_idx" unique="false" columns="doctor_id"/>
+      <index name="fk_recept_patient1_idx" unique="false" columns="patient_id"/>
+    </table>
+    <table name="session" schema="" catalog="DBS" type="TABLE">
+      <column name="patient_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="doctor_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="sess_id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <primary-key name="PRIMARY" columns="sess_id"/>
+      <foreign-key name="pk_sess" columns="patient_id" ref-table="patient" ref-schema="" ref-catalog="DBS" ref-columns="patient_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="session_ibfk_1" columns="patient_id" ref-table="patient" ref-schema="" ref-catalog="DBS" ref-columns="patient_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="session_ibfk_2" columns="doctor_id" ref-table="doctor" ref-schema="" ref-catalog="DBS" ref-columns="doctor_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="pk_sess" unique="false" columns="patient_id"/>
+    </table>
+  </data-source>
 </component>

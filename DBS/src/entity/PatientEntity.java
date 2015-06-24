@@ -7,7 +7,7 @@ import java.util.Set;
  * Created by marcelforgac on 3.5.15.
  */
 @Entity
-@Table(name = "patient", schema = "", catalog = "ikvb6ju5")
+@Table(name = "patient", schema = "", catalog = "DBS")
 public class PatientEntity {
 	private int patientId;
 	private String name;

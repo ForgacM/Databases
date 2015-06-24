@@ -7,5 +7,11 @@
       <schema-pattern>ikvb6ju5.*</schema-pattern>
       <default-schemas>ikvb6ju5.*</default-schemas>
     </data-source>
+    <data-source name="MySQL - DBS@localhost" uuid="c288628c-73df-49ad-aab9-e423019067a9">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>DBS.*</schema-pattern>
+      <default-schemas>DBS.*</default-schemas>
+    </data-source>
   </component>
 </project>

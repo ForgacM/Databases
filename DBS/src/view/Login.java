@@ -11,7 +11,6 @@ public class Login extends JFrame {
 	public JTextField textField1;
 	public JButton loginButton;
 	public JButton registrationButton;
-	public JButton doctorLoginButton;
 	public JLabel label;
 
 	public Login() {

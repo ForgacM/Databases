@@ -8,6 +8,7 @@
           <unit-entry name="hibernate.cfg.xml" value="268b3feb-4e98-4afa-a8b0-ea4efcd047b4" />
         </datasource-map>
         <naming-strategy-map />
+        <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/dbUtil/hibernate1.cfg.xml" />
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/entity/hibernate.cfg.xml" />
       </configuration>
     </facet>
@@ -20,6 +21,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Hibernate 4.2.2-4.2.2" level="project" />
-    <orderEntry type="library" name="mysql-connector-java-5.1" level="project" />
+    <orderEntry type="library" name="mysql-connector-java-5.11" level="project" />
   </component>
 </module>

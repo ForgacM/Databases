@@ -7,7 +7,7 @@ import java.util.Set;
  * Created by marcelforgac on 3.5.15.
  */
 @Entity
-@Table(name = "recept", schema = "", catalog = "ikvb6ju5")
+@Table(name = "recept", schema = "", catalog = "DBS")
 public class ReceptEntity {
 	private int receptId;
 	private String date;
